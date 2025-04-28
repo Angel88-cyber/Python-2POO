@@ -1,0 +1,21 @@
+class CarteraCripto:
+    def __init__(self, usuario):
+        self.__usuario = usuario
+        self.__saldo_btc = 0.0
+
+    def consultar_saldo(self):
+        return self.__saldo_btc
+
+    def comprar_btc(self, monto_usd, precio_actual_btc):
+        if precio_actual_btc > 0 and monto_usd > 0:
+            btc_comprado = monto_usd / precio_actual_btc
+            self.__saldo_btc += btc_comprado
+        else:
+            raise ValueError("Los montos deben ser positivos.")
+
+    def vender_btc(self, monto_btc, precio_actual_btc):
+        if monto_btc <= self.__saldo_btc and monto_btc > 0 and precio_actual_btc > 0:
+            self.__saldo_btc -= monto_btc
+            return monto_btc * precio_actual_btc
+        else:
+            raise ValueError("No se puede vender esa cantidad de BTC.")

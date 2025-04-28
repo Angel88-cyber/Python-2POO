@@ -1,0 +1,25 @@
+class Empleado:
+    def __init__(self, nombre, rol, clave_acceso):
+        self.__nombre = nombre
+        self.__rol = rol
+        self.__clave_acceso = self.__cifrar_clave(clave_acceso)
+
+    @property
+    def nombre(self):
+        return self.__nombre
+
+    @property
+    def rol(self):
+        return self.__rol
+
+    def __cifrar_clave(self, clave):
+        return clave[::-1]
+
+    def verificar_clave(self, clave_ingresada):
+        return self.__clave_acceso == self.__cifrar_clave(clave_ingresada)
+
+    def cambiar_clave(self, clave_antigua, nueva_clave):
+        if self.verificar_clave(clave_antigua):
+            self.__clave_acceso = self.__cifrar_clave(nueva_clave)
+        else:
+            raise ValueError("Clave antigua incorrecta.")

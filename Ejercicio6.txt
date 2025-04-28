@@ -1,0 +1,43 @@
+class Empleado:
+    def __init__(self, nombre, sueldo_base):
+        self.__nombre = nombre
+        self.__sueldo_base = sueldo_base
+
+    @property
+    def nombre(self):
+        return self.__nombre
+
+    @property
+    def sueldo_base(self):
+        return self.__sueldo_base
+
+    @sueldo_base.setter
+    def sueldo_base(self, valor):
+        if valor >= 0:
+            self.__sueldo_base = valor
+        else:
+            raise ValueError("El sueldo base no puede ser negativo.")
+
+    def calcular_salario(self):
+        pass
+
+class EmpleadoFijo(Empleado):
+    def calcular_salario(self):
+        return self.sueldo_base
+
+class EmpleadoPorHoras(Empleado):
+    def __init__(self, nombre, sueldo_base, horas_trabajadas, valor_hora):
+        super().__init__(nombre, sueldo_base)
+        self.__horas_trabajadas = horas_trabajadas
+        self.__valor_hora = valor_hora
+
+    def calcular_salario(self):
+        return self.__horas_trabajadas * self.__valor_hora
+
+class EmpleadoTemporal(Empleado):
+    def __init__(self, nombre, sueldo_base, dias_trabajados):
+        super().__init__(nombre, sueldo_base)
+        self.__dias_trabajados = dias_trabajados
+
+    def calcular_salario(self):
+        return (self.sueldo_base / 30) * self.__dias_trabajados
